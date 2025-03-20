@@ -30,6 +30,7 @@ import { navItems, pricingPlans } from "../data/lang_data"
 import CTA from "./components/landing/CTA"
 import FAQ from "./components/landing/FAQ"
 import Features from "./components/landing/Features"
+import Footer from "./components/landing/Footer"
 
 export default function TopPage() {
   const theme = useTheme()
@@ -400,15 +401,7 @@ export default function TopPage() {
 
       <FAQ />
       <CTA />
-
-      {/* フッター */}
-      <Box sx={{ py: 6, bgcolor: "background.paper", borderTop: 1, borderColor: "divider" }}>
-        <Container maxWidth="lg">
-          <Typography variant="body2" color="text.secondary" align="center">
-            © {new Date().getFullYear()} VideoConnect. All rights reserved.
-          </Typography>
-        </Container>
-      </Box>
+      <Footer />
     </Box>
   )
 }
