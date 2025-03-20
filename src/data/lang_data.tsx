@@ -69,3 +69,29 @@ export const pricingPlans = [
       buttonVariant: "outlined",
     },
   ]
+
+export const faqs = [
+    {
+      question: "何人まで同時に通話できますか？",
+      answer:
+        "プランによって異なります。無料プランでは最大4人、プロフェッショナルプランでは最大15人、ビジネスプランでは最大50人まで同時に通話できます。",
+    },
+    {
+      question: "通話の録画はできますか？",
+      answer:
+        "はい、プロフェッショナルプラン以上では通話の録画が可能です。録画はクラウドに保存され、後から視聴やダウンロードができます。",
+    },
+    {
+      question: "モバイルデバイスでも使用できますか？",
+      answer: "はい、iOS、Androidアプリを提供しています。また、モバイルブラウザからもアクセス可能です。",
+    },
+    {
+      question: "インターネット接続の要件は何ですか？",
+      answer:
+        "快適にご利用いただくには、上り下り共に最低2Mbpsの接続速度を推奨しています。HD画質では5Mbps以上が理想的です。",
+    },
+    {
+      question: "支払い方法は何がありますか？",
+      answer: "クレジットカード（Visa、Mastercard、American Express、JCB）、PayPal、銀行振込に対応しています。",
+    },
+  ]

@@ -21,16 +21,14 @@ import {
   ListItemText,
   Divider,
   useMediaQuery,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
   Paper,
 } from "@mui/material"
-import { Menu as MenuIcon, Videocam, ExpandMore, Check } from "@mui/icons-material"
+import { Menu as MenuIcon, Videocam, Check } from "@mui/icons-material"
 import { useTheme } from "@mui/material/styles"
 import Link from "next/link"
 import { navItems, features, pricingPlans } from "../data/lang_data"
 import CTA from "./components/landing/CTA"
+import FAQ from "./components/landing/FAQ"
 
 export default function TopPage() {
   const theme = useTheme()
@@ -46,31 +44,6 @@ export default function TopPage() {
     }
     setDrawerOpen(open)
   }
-  const faqs = [
-    {
-      question: "何人まで同時に通話できますか？",
-      answer:
-        "プランによって異なります。無料プランでは最大4人、プロフェッショナルプランでは最大15人、ビジネスプランでは最大50人まで同時に通話できます。",
-    },
-    {
-      question: "通話の録画はできますか？",
-      answer:
-        "はい、プロフェッショナルプラン以上では通話の録画が可能です。録画はクラウドに保存され、後から視聴やダウンロードができます。",
-    },
-    {
-      question: "モバイルデバイスでも使用できますか？",
-      answer: "はい、iOS、Androidアプリを提供しています。また、モバイルブラウザからもアクセス可能です。",
-    },
-    {
-      question: "インターネット接続の要件は何ですか？",
-      answer:
-        "快適にご利用いただくには、上り下り共に最低2Mbpsの接続速度を推奨しています。HD画質では5Mbps以上が理想的です。",
-    },
-    {
-      question: "支払い方法は何がありますか？",
-      answer: "クレジットカード（Visa、Mastercard、American Express、JCB）、PayPal、銀行振込に対応しています。",
-    },
-  ]
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -457,42 +430,7 @@ export default function TopPage() {
         </Container>
       </Box>
 
-      {/* よくある質問セクション */}
-      <Box id="faq" sx={{ py: { xs: 8, md: 12 }, bgcolor: "background.paper" }}>
-        <Container maxWidth="md">
-          <Typography variant="h3" component="h2" align="center" sx={{ mb: 2, fontWeight: 700 }}>
-            よくある質問
-          </Typography>
-
-          <Typography
-            variant="h6"
-            component="p"
-            align="center"
-            color="text.secondary"
-            sx={{ mb: 8, maxWidth: "700px", mx: "auto" }}
-          >
-            ご不明な点がございましたら、お気軽にお問い合わせください
-          </Typography>
-
-          <Box sx={{ mt: 4 }}>
-            {faqs.map((faq, index) => (
-              <Accordion key={index} sx={{ mb: 2, boxShadow: 1, borderRadius: "8px !important", overflow: "hidden" }}>
-                <AccordionSummary
-                  expandIcon={<ExpandMore />}
-                  aria-controls={`panel${index}-content`}
-                  id={`panel${index}-header`}
-                >
-                  <Typography variant="h6">{faq.question}</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography color="text.secondary">{faq.answer}</Typography>
-                </AccordionDetails>
-              </Accordion>
-            ))}
-          </Box>
-        </Container>
-      </Box>
-
+      <FAQ />
       <CTA />
 
       {/* フッター */}
