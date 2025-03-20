@@ -13,7 +13,6 @@ import {
   List,
   ListItem,
   Divider,
-  Paper,
 } from "@mui/material"
 import { Menu as Check } from "@mui/icons-material"
 import { useTheme } from "@mui/material/styles"
@@ -24,6 +23,7 @@ import Features from "./components/landing/Features"
 import Footer from "./components/landing/Footer"
 import Header from "./components/landing/Header"
 import Hero from "./components/landing/Hero"
+import HowItWorks from "./components/landing/HowItWorks"
 
 export default function TopPage() {
   const theme = useTheme()
@@ -36,125 +36,7 @@ export default function TopPage() {
       <Hero />
       <Features />
 
-      {/* 使い方セクション */}
-      <Box sx={{ py: { xs: 8, md: 12 }, bgcolor: "background.paper" }}>
-        <Container maxWidth="lg">
-          <Typography variant="h3" component="h2" align="center" sx={{ mb: 2, fontWeight: 700 }}>
-            簡単3ステップ
-          </Typography>
-
-          <Typography
-            variant="h6"
-            component="p"
-            align="center"
-            color="text.secondary"
-            sx={{ mb: 8, maxWidth: "700px", mx: "auto" }}
-          >
-            アカウント登録から通話開始まで、わずか数分で完了します
-          </Typography>
-
-          <Grid container spacing={6} alignItems="center">
-            <Grid item xs={12} md={6}>
-              <Box
-                sx={{
-                  width: "100%",
-                  height: { xs: "250px", md: "350px" },
-                  position: "relative",
-                  bgcolor: "#f5f5f5",
-                  borderRadius: 4,
-                  backgroundImage: `url(/placeholder.svg?height=350&width=500)`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Box>
-                <Box sx={{ display: "flex", alignItems: "flex-start", mb: 4 }}>
-                  <Paper
-                    sx={{
-                      width: 40,
-                      height: 40,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      borderRadius: "50%",
-                      bgcolor: "primary.main",
-                      color: "primary.contrastText",
-                      mr: 2,
-                      flexShrink: 0,
-                    }}
-                  >
-                    <Typography variant="h6">1</Typography>
-                  </Paper>
-                  <Box>
-                    <Typography variant="h5" gutterBottom>
-                      アカウント登録
-                    </Typography>
-                    <Typography color="text.secondary">
-                      メールアドレスで簡単に登録。ソーシャルアカウントでのログインも可能です。
-                    </Typography>
-                  </Box>
-                </Box>
-
-                <Box sx={{ display: "flex", alignItems: "flex-start", mb: 4 }}>
-                  <Paper
-                    sx={{
-                      width: 40,
-                      height: 40,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      borderRadius: "50%",
-                      bgcolor: "primary.main",
-                      color: "primary.contrastText",
-                      mr: 2,
-                      flexShrink: 0,
-                    }}
-                  >
-                    <Typography variant="h6">2</Typography>
-                  </Paper>
-                  <Box>
-                    <Typography variant="h5" gutterBottom>
-                      ミーティングを作成
-                    </Typography>
-                    <Typography color="text.secondary">
-                      新しいミーティングを作成するか、既存のミーティングに参加します。
-                    </Typography>
-                  </Box>
-                </Box>
-
-                <Box sx={{ display: "flex", alignItems: "flex-start" }}>
-                  <Paper
-                    sx={{
-                      width: 40,
-                      height: 40,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      borderRadius: "50%",
-                      bgcolor: "primary.main",
-                      color: "primary.contrastText",
-                      mr: 2,
-                      flexShrink: 0,
-                    }}
-                  >
-                    <Typography variant="h6">3</Typography>
-                  </Paper>
-                  <Box>
-                    <Typography variant="h5" gutterBottom>
-                      招待を共有
-                    </Typography>
-                    <Typography color="text.secondary">
-                      リンクやコードを共有して、参加者を招待します。メールでの招待も可能です。
-                    </Typography>
-                  </Box>
-                </Box>
-              </Box>
-            </Grid>
-          </Grid>
-        </Container>
-      </Box>
+      <HowItWorks />
 
       {/* 料金プランセクション */}
       <Box id="pricing" sx={{ py: { xs: 8, md: 12 }, bgcolor: "background.default" }}>
