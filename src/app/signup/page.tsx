@@ -8,11 +8,15 @@ export default function SignupPage() {
   const [message, setMessage] = useState("");
 
   const handleSignUp = async () => {
-    const res = await fetch("../server/auth/signup", {
+    const res = await fetch("/server/auth/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, email, password }),
     });
+
+    if (!res.ok) {
+        throw new Error(`エラー: ${res.status}`);
+      }
 
     const data = await res.json();
     setMessage(data.error || "登録成功！確認メールを送信しました");

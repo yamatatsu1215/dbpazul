@@ -7,7 +7,7 @@ interface User {
     password: string;
 }
 
-export async function post(request: Request) {
+export async function POST(request: Request) {
     const { username, email, password }: User = await request.json();
     
     const { data, error } = await supabase.auth.signUp({
