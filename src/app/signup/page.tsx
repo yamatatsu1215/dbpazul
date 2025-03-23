@@ -8,15 +8,15 @@ export default function SignupPage() {
   const [message, setMessage] = useState("");
 
   const handleSignUp = async () => {
-    const res = await fetch("/server/auth/signup", {
+    const res = await fetch("/api/auth/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, email, password }),
     });
 
     if (!res.ok) {
-        throw new Error(`エラー: ${res.status}`);
-      }
+      throw new Error(`エラー: ${res.status}`);
+    }
 
     const data = await res.json();
     setMessage(data.error || "登録成功！確認メールを送信しました");
@@ -24,23 +24,26 @@ export default function SignupPage() {
 
   return (
     <div>
-    <input
-      type="name"
-      value={username}
-      onChange={(e) => setUsername(e.target.value)}
-    />
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={handleSignUp}>Signup</button>
-      <p>{message}</p>
+      <form onSubmit={handleSignUp}>
+        <h1>Signup</h1>
+        <input
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button>Signup</button>
+        <p>{message}</p>
+      </form>
     </div>
   );
 }
