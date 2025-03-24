@@ -1,7 +1,9 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function SignupPage() {
+  const router = useRouter();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,12 +16,13 @@ export default function SignupPage() {
       body: JSON.stringify({ username, email, password }),
     });
 
-    if (!res.ok) {
-      throw new Error(`エラー: ${res.status}`);
+    if (res.ok) {
+      const data = await res.json();
+      setMessage(data.error || "登録成功！確認メールを送信しました");
+      router.push("/");
+    } else {
+      throw new Error("サーバーエラー");
     }
-
-    const data = await res.json();
-    setMessage(data.error || "登録成功！確認メールを送信しました");
   };
 
   return (
