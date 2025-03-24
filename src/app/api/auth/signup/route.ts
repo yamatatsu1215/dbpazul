@@ -38,7 +38,7 @@ export async function POST(request: Request) {
 
     // SQL でデータベースに登録
     await prisma.$executeRaw`
-      INSERT INTO User (id, email, username, password)
+      INSERT INTO "User" (id, email, username, password)
       VALUES (${userId}, ${email}, ${username}, ${hashedPassword});
     `;
 

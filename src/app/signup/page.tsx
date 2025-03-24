@@ -39,6 +39,7 @@ export default function SignupPage() {
         <input
           type="password"
           value={password}
+          placeholder="6文字以上で入力してください"
           onChange={(e) => setPassword(e.target.value)}
         />
         <button>Signup</button>
