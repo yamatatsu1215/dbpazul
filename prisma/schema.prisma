@@ -18,4 +18,24 @@ model User {
   username  String
   email String @unique
   password String
+  profileImage String? @default("https://example.com/default-profile-image.png")
+  createdAt DateTime @default(now())
+  rooms RoomParticipant[]
+}
+
+model Room {
+  id String @id @default(uuid())
+  name String
+  createdBy String
+  createdAt DateTime @default(now())
+  participants RoomParticipant[] 
+}
+
+model RoomParticipant {
+  id String @id @default(uuid())
+  userId String
+  roomId String
+  joinedAt DateTime @default(now())
+  user User @relation(fields: [userId], references: [id])
+  room Room @relation(fields: [roomId], references: [id])
 }
