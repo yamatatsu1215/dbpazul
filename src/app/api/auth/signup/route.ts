@@ -9,11 +9,12 @@ interface User {
   email: string;
   username: string;
   password: string;
+  profileImage: string;
 }
 
 export async function POST(request: Request) {
   try {
-    const { username, email, password }: User = await request.json();
+    const { username, email, password, profileImage }: User = await request.json();
 
     // 入力チェック
     if (!email || !password || !username) {
@@ -38,8 +39,8 @@ export async function POST(request: Request) {
 
     // SQL でデータベースに登録
     await prisma.$executeRaw`
-      INSERT INTO "User" (id, email, username, password)
-      VALUES (${userId}, ${email}, ${username}, ${hashedPassword});
+      INSERT INTO "User" (id, email, username, password, profileImage, created_at )
+      VALUES (${userId}, ${email}, ${username}, ${hashedPassword}, ${profileImage}, NOW());
     `;
 
     return NextResponse.json({ message: "登録成功！確認メールを送信しました", userId });
