@@ -38,10 +38,15 @@ export async function POST(request: Request) {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // SQL でデータベースに登録
-    await prisma.$executeRaw`
-      INSERT INTO "User" (id, email, username, password, profileImage, created_at )
-      VALUES (${userId}, ${email}, ${username}, ${hashedPassword}, ${profileImage}, NOW());
-    `;
+    await prisma.user.create({
+      data: {
+        id: userId,
+        username,
+        email,
+        profileImage: profileImage || null,
+        password: hashedPassword,
+      },
+    });
 
     return NextResponse.json({ message: "登録成功！確認メールを送信しました", userId });
   } catch (error) {
