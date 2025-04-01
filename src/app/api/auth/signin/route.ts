@@ -5,7 +5,7 @@ import { serialize } from "cookie";
 export async function POST(req: Request) {
     try {
         const { email, password } = await req.json();
-
+        console.log("Login attempt:", { email, password });
         // 入力チェック
         if (!email || !password) {
             return NextResponse.json(
