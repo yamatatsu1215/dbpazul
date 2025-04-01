@@ -1,4 +1,4 @@
-"use client";
+
 import { NextResponse } from "next/server";
 
 import prisma from "@/server/prisma/prisma"; // Prisma クライアントのインポート
