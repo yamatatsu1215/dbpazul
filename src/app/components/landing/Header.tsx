@@ -27,10 +27,8 @@ import { supabase } from "@/lib/supabase";
 interface User {
   id: string;
   email: string | undefined;
-  user_metadata: {
-    username: string;
-    profileImage: string;
-  };
+  username: string;
+  profileImage: string;
 }
 export default function Header() {
   const theme = useTheme();
@@ -41,40 +39,14 @@ export default function Header() {
   const open = Boolean(anchorEl);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      const { data, error } = await supabase.auth.getUser();
-      if (data?.user) {
-        setUser({
-          id: data.user.id,
-          email: data.user.email || "",
-          user_metadata: {
-            username: data.user.user_metadata?.username || "",
-            profileImage: data.user.user_metadata?.profileImage || "/default-avatar.png",
-          },
-        });
+    async function fetchUser() {
+      const res = await fetch("/api/user");
+      if (res.ok) {
+        const data = await res.json();
+        setUser(data.user);
       }
-    };
+    }
     fetchUser();
-
-    // リアルタイムでユーザー情報を監視
-    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
-      return setUser(
-        session?.user
-          ? {
-              id: session.user.id,
-              email: session.user.email || "",
-              user_metadata: {
-                username: session.user.user_metadata?.username || "",
-                profileImage: session.user.user_metadata?.profileImage || "/default-avatar.png",
-              },
-            }
-          : null
-      );
-    });
-    
-    return () => {
-      authListener.subscription.unsubscribe();
-    };
   }, []);
 
   const handleLogout = async () => {
@@ -119,10 +91,10 @@ export default function Header() {
                 // 🔹 ログイン後の表示
                 <>
                   <IconButton onClick={(e) => setAnchorEl(e.currentTarget)}>
-                    <Avatar src={user.user_metadata?.profileImage || "/default-avatar.png"} />
+                    <Avatar src={user.profileImage || "/default-avatar.png"} />
                   </IconButton>
                   <Menu anchorEl={anchorEl} open={open} onClose={() => setAnchorEl(null)}>
-                    <MenuItem>{user.user_metadata?.username || "ユーザー"}</MenuItem>
+                    <MenuItem>{user.username}</MenuItem>
                     <Divider />
                     <MenuItem onClick={handleLogout}>ログアウト</MenuItem>
                   </Menu>
@@ -158,8 +130,8 @@ export default function Header() {
             {user ? (
               <>
                 <ListItem>
-                  <Avatar src={user.user_metadata?.profileImage || "/default-avatar.png"} sx={{ mr: 1 }} />
-                  <ListItemText primary={user.user_metadata?.username || "ユーザー"} />
+                  <Avatar src={user.profileImage || "/default-avatar.png"} sx={{ mr: 1 }} />
+                  <ListItemText primary={user.username || "ユーザー"} />
                 </ListItem>
               </>
             ) : (
