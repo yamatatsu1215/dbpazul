@@ -27,7 +27,7 @@ export async function GET(req: Request) {
 
     // ユーザー詳細情報を取得（username, profileImage など）
     const { data: userDetails, error: userError } = await supabase
-        .from("user") // ⚠️ テーブル名を適切に変更
+        .from("User")
         .select("username, profileImage")
         .eq("id", data.user.id)
         .single();
