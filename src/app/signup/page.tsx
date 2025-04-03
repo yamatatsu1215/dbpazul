@@ -3,6 +3,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
 import Image from "next/image";
+import Header from "../components/landing/Header";
+import Footer from "../components/landing/Footer";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -56,6 +58,7 @@ export default function SignupPage() {
 
   return (
     <div>
+    <Header />
       <form onSubmit={handleSignUp} encType="multipart/form-data">
         <h1>Signup</h1>
         <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
@@ -66,6 +69,7 @@ export default function SignupPage() {
         <button type="submit">Signup</button>
         <p>{message}</p>
       </form>
+      <Footer />
     </div>
   );
 }

@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Header from "../components/landing/Header";
+import Footer from "../components/landing/Footer";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -28,6 +30,7 @@ export default function LoginPage() {
 
   return (
     <div>
+      <Header />
       <form onSubmit={handleLogin}>
         <h1>Login</h1>
         <input
@@ -43,6 +46,7 @@ export default function LoginPage() {
         <button type="submit">Login</button>
         <p>{message}</p>
       </form>
+      <Footer />
     </div>
   );
 }
