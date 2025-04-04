@@ -21,6 +21,9 @@ model User {
   profileImage String? @default("https://example.com/default-profile-image.png")
   createdAt DateTime @default(now())
   rooms RoomParticipant[]
+  followers Follow[] @relation("Follower")
+  followings Follow[] @relation("Following")
+  messages Message[]
 }
 
 model Room {
@@ -28,7 +31,8 @@ model Room {
   name String
   createdBy String
   createdAt DateTime @default(now())
-  participants RoomParticipant[] 
+  participants RoomParticipant[]
+  messages Message[]
 }
 
 model RoomParticipant {
@@ -38,4 +42,25 @@ model RoomParticipant {
   joinedAt DateTime @default(now())
   user User @relation(fields: [userId], references: [id])
   room Room @relation(fields: [roomId], references: [id])
+}
+
+//フォローテーブル
+model Follow {
+  id String @id @default(uuid())
+  followerId String
+  followingId String
+  createdAt DateTime @default(now())
+  follower User @relation("Follower", fields: [followerId], references: [id])
+  following User @relation("Following", fields: [followingId], references: [id])
+}
+
+//メッセージテーブル
+model Message {
+  id String @id @default(uuid())
+  roomId String
+  senderId String
+  content String
+  createdAt DateTime @default(now())
+  room Room @relation(fields: [roomId], references: [id])
+  sender User @relation(fields: [senderId], references: [id])
 }
