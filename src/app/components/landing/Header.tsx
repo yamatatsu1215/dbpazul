@@ -23,13 +23,8 @@ import { useTheme } from "@mui/material/styles";
 import Link from "next/link";
 import { navItems } from "@/data/lang_data";
 import { supabase } from "@/lib/supabase";
+import { User } from "@/types/types";
 
-interface User {
-  id: string;
-  email: string | undefined;
-  username: string;
-  profileImage: string;
-}
 export default function Header() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
