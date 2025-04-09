@@ -13,3 +13,22 @@ export async function GET() {
 
     return NextResponse.json(data as Room[]);
 }
+
+
+// Roomテーブルの新規作成
+export async function POST(request: Request) {
+    const { name, description } = await request.json();
+
+    const { data, error } = await supabase.from('room').insert([
+        {
+            name,
+            description,
+        },
+    ]);
+
+    if (error) {
+        return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    return NextResponse.json(data, { status: 200 });
+}
