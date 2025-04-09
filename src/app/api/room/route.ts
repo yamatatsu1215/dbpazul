@@ -17,12 +17,11 @@ export async function GET() {
 
 // Roomテーブルの新規作成
 export async function POST(request: Request) {
-    const { name, description } = await request.json();
+    const { name } = await request.json();
 
     const { data, error } = await supabase.from('room').insert([
         {
             name,
-            description,
         },
     ]);
 
