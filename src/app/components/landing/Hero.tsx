@@ -54,7 +54,7 @@ export default function Hero() {
             color="primary"
             size="large"
             component={Link}
-            href="/room"
+            href="/room_select"
             sx={{ px: 4, py: 1.5, fontSize: "1.1rem" }}
           >
             デモを見る

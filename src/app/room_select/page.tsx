@@ -1,5 +1,6 @@
 "use client";
 import { Room } from "@/types/types";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 const RoomSelectPage = () => {
@@ -32,6 +33,7 @@ const RoomSelectPage = () => {
                     </li>
                 ))}
             </ul>
+            <Link href="room_create" />
         </div>
     );
 };
