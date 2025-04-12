@@ -33,7 +33,7 @@ const RoomSelectPage = () => {
                     </li>
                 ))}
             </ul>
-            <Link href="room_create" />
+            <Link href="room_create">ルーム作成</Link>
         </div>
     );
 };

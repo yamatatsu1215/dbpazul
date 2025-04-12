@@ -31,6 +31,7 @@ export default function LoginPage() {
   return (
     <div>
       <Header />
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <form onSubmit={handleLogin}>
         <h1>Login</h1>
         <input
@@ -46,6 +47,7 @@ export default function LoginPage() {
         <button type="submit">Login</button>
         <p>{message}</p>
       </form>
+      </div>
       <Footer />
     </div>
   );
