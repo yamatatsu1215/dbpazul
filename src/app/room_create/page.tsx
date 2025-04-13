@@ -1,27 +1,45 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import React,{  useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function RoomCreatePage() {
     const [roomName, setRoomName] = useState("");
-    const router = useRouter(); // ルーターを使用してリダイレクトするために必要
+    const [userId, setUserId] = useState("");
+    const router = useRouter();
 
+    useEffect(() => {
+        async function fetchUser() {
+            const res = await fetch("/api/user"); // Cookie経由で認証＆user取得
+            if (res.ok) {
+                const data = await res.json();
+                setUserId(data.user.id); // ユーザーIDだけ取り出して保存
+            } else {
+                router.push("/login"); // 未認証ならログインへ
+            }
+        }
+        fetchUser();
+    }, [router]);
 
     async function createRoom() {
-        const response = await fetch("/api/room", {
+        const res = await fetch("/api/room", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
                 name: roomName,
+                userId: userId, // ユーザーIDを渡す
             }),
         });
-        if (response.ok) {
-            const data = await response.json();
+
+        if (res.ok) {
+            const data = await res.json();
             console.log("ルーム作成成功:", data);
-            router.push("/room_select"); // ルーム作成成功後にルーム選択画面に遷移
+            router.push("/room_select");
+        } else {
+            const error = await res.json();
+            alert(`ルーム作成失敗: ${error.error}`);
         }
     }
 
@@ -34,7 +52,7 @@ export default function RoomCreatePage() {
                 onChange={(e) => setRoomName(e.target.value)}
                 placeholder="ルーム名"
             />
-            <button onClick={createRoom}>作成</button>
+            <button onClick={createRoom} disabled={!userId}>作成</button>
         </div>
     );
 }

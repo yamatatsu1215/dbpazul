@@ -2,7 +2,7 @@
 import { NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
 import { Room } from '@/types/types';
-import { cookies } from 'next/headers';
+import { v4 as uuidv4 } from "uuid";
 
 // Roomテーブルの全件取得
 export async function GET() {
@@ -18,28 +18,13 @@ export async function GET() {
 
 // Roomテーブルの新規作成
 export async function POST(request: Request) {
-    const { name } = await request.json();
+    const { name,userId } = await request.json();
 
-    const cookie = await cookies();
-    const token = cookie.get('auth_token')?.value;
 
-    if (!token) {
-        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-    // トークンを使用してユーザー情報を取得する例
-    const { data: userData, error: userError } = await supabase.auth.getUser(token);
-    if (userError) {
-        return NextResponse.json({ error: userError.message }, { status: 401 });
-    }
-    const user = userData.user;
-    if (!user) {
-        return NextResponse.json({ error: 'User not found' }, { status: 404 });
-    }
-
-    const userId = user.id;
 
     const { data, error } = await supabase.from('Room').insert([
         {
+            id: uuidv4(), // UUIDを生成
             name: name,
             createdBy: userId,
         },
@@ -51,3 +36,4 @@ export async function POST(request: Request) {
 
     return NextResponse.json(data, { status: 200 });
 }
+
