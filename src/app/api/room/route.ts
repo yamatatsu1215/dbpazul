@@ -6,7 +6,7 @@ import { cookies } from 'next/headers';
 
 // Roomテーブルの全件取得
 export async function GET() {
-    const { data, error } = await supabase.from('room').select('*');
+    const { data, error } = await supabase.from('Room').select('*');
 
     if (error) {
         return NextResponse.json({ error: error.message }, { status: 500 });
@@ -38,7 +38,7 @@ export async function POST(request: Request) {
 
     const userId = user.id;
 
-    const { data, error } = await supabase.from('room').insert([
+    const { data, error } = await supabase.from('Room').insert([
         {
             name: name,
             createdBy: userId,
