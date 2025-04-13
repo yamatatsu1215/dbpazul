@@ -24,6 +24,7 @@ model User {
   followers Follow[] @relation("Follower")
   followings Follow[] @relation("Following")
   messages Message[]
+  roomsCreated Room[]
 }
 
 model Room {
@@ -33,6 +34,7 @@ model Room {
   createdAt DateTime @default(now())
   participants RoomParticipant[]
   messages Message[]
+  user User @relation(fields: [createdBy], references: [id])
 }
 
 model RoomParticipant {
