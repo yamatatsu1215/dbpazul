@@ -8,6 +8,7 @@ import ParticipantsGrid from "../../components/video_component/ParticipantsGrid"
 import ControlBar from "../../components/video_component/ControlBar";
 import SidebarDrawer from "../../components/video_component/SidebarDrawer";
 import { useParams } from "next/navigation";
+import { useEffect } from "react";
 
 export default function VideoCallApp() {
   const { id } = useParams();
@@ -40,29 +41,22 @@ export default function VideoCallApp() {
     },
   ];
 
-  const messages = [
-    {
-      id: "1",
-      roomId: Array.isArray(id) ? id.join(",") : id || "",
-      senderId: "Alex Johnson",
-      content: "Hello everyone!",
-      createdAt: new Date("2023-01-01T10:01:00"),
-    },
-    {
-      id: "2",
-      roomId:  Array.isArray(id) ? id.join(",") : id || "",
-      senderId: "Maria Garcia",
-      content: "Hi Alex, how are you?",
-      createdAt: new Date("2023-01-01T10:02:00"),
-    },
-    {
-      id: "3",
-      roomId:  Array.isArray(id) ? id.join(",") : id || "",
-      senderId: "You",
-      content: "Good morning team!",
-      createdAt: new Date("2023-01-01T10:03:00"),
-    },
-  ];
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    const fetchMessages = async () => {
+      try {
+        const roomId = Array.isArray(id) ? id.join(",") : id || "";
+        const response = await fetch(`/api/messages?roomId=${roomId}`);
+        setMessages(response.ok ? await response.json() : []);
+        console.log("Fetched messages:", response.ok ? await response.json() : []);
+      } catch (error) {
+        console.error("Failed to fetch messages:", error);
+      }
+    };
+
+    fetchMessages();
+  }, [id]);
 
   const handleSendMessage = () => {
     if (message.trim()) setMessage("");
@@ -95,6 +89,7 @@ export default function VideoCallApp() {
         message={message}
         setMessage={setMessage}
         onSendMessage={handleSendMessage}
+        roomId={Array.isArray(id) ? id.join(",") : id || ""} // ルームIDを渡す
       />
     </Box>
   );

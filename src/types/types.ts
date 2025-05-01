@@ -74,14 +74,16 @@ export interface SidebarDrawerProps {
     message: string;
     setMessage: (message: string) => void;
     onSendMessage: () => void;
-  }
+    roomId: string; // Add roomId prop to pass the room ID
+}
 
 export interface ChatTabProps {
     messages: Message[];
     message: string;
     setMessage: (value: string) => void;
     onSendMessage: () => void;
-  }
+    roomId: string; // Add roomId prop to pass the room ID
+}
 
 
 export interface ParticipantsTabProps {
