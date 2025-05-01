@@ -27,7 +27,7 @@ const RoomSelectPage = () => {
       <ul>
         {room.map((r) => (
           <li key={r.id}>
-            <Link href={`/room_select/${r.id}`}>
+            <Link href={`/video_all/${r.id}`}>
               <h2>{r.name}</h2>
               <p>ルームID: {r.id}</p>
               <p>作成日時: {new Date(r.createdAt).toLocaleString()}</p>

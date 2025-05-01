@@ -7,8 +7,10 @@ import AppHeader from "../../components/video_component/AppHeader";
 import ParticipantsGrid from "../../components/video_component/ParticipantsGrid";
 import ControlBar from "../../components/video_component/ControlBar";
 import SidebarDrawer from "../../components/video_component/SidebarDrawer";
+import { useParams } from "next/navigation";
 
 export default function VideoCallApp() {
+  const { id } = useParams();
   const [micOn, setMicOn] = useState(true);
   const [videoOn, setVideoOn] = useState(true);
   const [screenSharing, setScreenSharing] = useState(false);
@@ -41,21 +43,21 @@ export default function VideoCallApp() {
   const messages = [
     {
       id: "1",
-      roomId: "1",
+      roomId: Array.isArray(id) ? id.join(",") : id || "",
       senderId: "Alex Johnson",
       content: "Hello everyone!",
       createdAt: new Date("2023-01-01T10:01:00"),
     },
     {
       id: "2",
-      roomId: "2",
+      roomId:  Array.isArray(id) ? id.join(",") : id || "",
       senderId: "Maria Garcia",
       content: "Hi Alex, how are you?",
       createdAt: new Date("2023-01-01T10:02:00"),
     },
     {
       id: "3",
-      roomId: "3",
+      roomId:  Array.isArray(id) ? id.join(",") : id || "",
       senderId: "You",
       content: "Good morning team!",
       createdAt: new Date("2023-01-01T10:03:00"),
