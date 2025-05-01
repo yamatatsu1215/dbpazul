@@ -50,4 +50,16 @@ export interface Participant {
     name: string;
     avatar: string;
     isSpeaking: boolean;
-  }
+}
+
+export interface ControlBarProps {
+    micOn: boolean;
+    setMicOn: (value: boolean) => void;
+    videoOn: boolean;
+    setVideoOn: (value: boolean) => void;
+    screenSharing: boolean;
+    setScreenSharing: (value: boolean) => void;
+    sidebarOpen: boolean;
+    setSidebarOpen: (value: boolean) => void;
+    tabValue: number;
+}
