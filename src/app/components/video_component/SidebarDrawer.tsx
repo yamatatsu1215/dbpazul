@@ -1,6 +1,6 @@
 // components/SidebarDrawer.tsx
 import { Drawer, Tabs, Tab, Divider } from "@mui/material";
-import ChatTab from "./ChatTab";
+import ChatTab from "../video_component/ChatTab";
 import ParticipantsTab from "./ParticipantsTab";
 import { Chat, People } from "@mui/icons-material";
 import { SidebarDrawerProps } from "@/types/types"; // Adjust the import path as necessary

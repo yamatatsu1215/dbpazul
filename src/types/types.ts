@@ -75,3 +75,10 @@ export interface SidebarDrawerProps {
     setMessage: (message: string) => void;
     onSendMessage: () => void;
   }
+
+export interface ChatTabProps {
+    messages: Message[];
+    message: string;
+    setMessage: (value: string) => void;
+    onSendMessage: () => void;
+  }
