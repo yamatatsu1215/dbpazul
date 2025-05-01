@@ -82,3 +82,8 @@ export interface ChatTabProps {
     setMessage: (value: string) => void;
     onSendMessage: () => void;
   }
+
+
+export interface ParticipantsTabProps {
+    participants: Participant[];
+  }
