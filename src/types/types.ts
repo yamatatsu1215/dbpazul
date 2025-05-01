@@ -44,3 +44,10 @@ export interface Message {
     content: string; // メッセージ内容
     createdAt: Date; // 作成日時
 }
+
+export interface Participant {
+    id: number;
+    name: string;
+    avatar: string;
+    isSpeaking: boolean;
+  }

@@ -1,8 +1,9 @@
 // components/ParticipantsGrid.tsx
 import { Grid } from "@mui/material";
-import ParticipantTile from "./ParticipantTile";
+import ParticipantTile from "../video_component/ParticipantTile";
+import { Participant } from "@/types/types"; 
 
-export default function ParticipantsGrid({ participants, micOn }) {
+export default function ParticipantsGrid({ participants, micOn } : { participants: Participant[]; micOn: boolean }) {
   return (
     <Grid container spacing={2}>
       {participants.map((p) => (
