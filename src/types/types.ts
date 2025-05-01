@@ -63,3 +63,15 @@ export interface ControlBarProps {
     setSidebarOpen: (value: boolean) => void;
     tabValue: number;
 }
+
+export interface SidebarDrawerProps {
+    open: boolean;
+    onClose: () => void;
+    tabValue: number;
+    onTabChange: (event: React.SyntheticEvent, newValue: number) => void;
+    participants: Participant[]; // Updated to use the Participant type
+    messages: Message[]; // Replace `any[]` with a more specific type if available
+    message: string;
+    setMessage: (message: string) => void;
+    onSendMessage: () => void;
+  }
