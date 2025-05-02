@@ -46,7 +46,7 @@ export default function ChatTab({
         },
         body: JSON.stringify({
           content: message,
-          senderId: userId, // ユーザーIDを渡す
+          senderId: userId?.id, // ユーザーIDを渡す
           roomId: roomId, // ルームIDを渡す
           createdAt: new Date(),
         }),
