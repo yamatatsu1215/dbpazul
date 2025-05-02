@@ -9,7 +9,7 @@ import {
   IconButton,
 } from "@mui/material";
 import { Send } from "@mui/icons-material";
-import { ChatTabProps } from "@/types/types";
+import { ChatTabProps, User } from "@/types/types";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -21,14 +21,15 @@ export default function ChatTab({
   roomId,
 }: ChatTabProps) {
   const router = useRouter();
-  const [userId, setUserId] = useState(""); // ユーザーIDを取得する処理を追加
+  const [userId, setUserId] = useState<User | null>(null); // ユーザーIDを取得する処理を追加
 
   useEffect(() => {
     async function fetchUser() {
       const res = await fetch("/api/user"); // Cookie経由で認証＆user取得
       if (res.ok) {
         const data = await res.json();
-        setUserId(data.user.id); // ユーザーIDだけ取り出して保存
+        setUserId(data.user); // ユーザーIDだけ取り出して保存
+        console.log("User ID:", data.user); // ユーザーIDをコンソールに表示
       } else {
         router.push("/login"); // 未認証ならログインへ
       }
@@ -66,7 +67,7 @@ export default function ChatTab({
             key={msg.id}
             sx={{
               justifyContent:
-                msg.senderId === "You" ? "flex-end" : "flex-start",
+                msg.senderId === userId?.id ? "flex-end" : "flex-start",
             }}
           >
             <Paper
@@ -74,13 +75,13 @@ export default function ChatTab({
                 p: 1.5,
                 maxWidth: "80%",
                 bgcolor:
-                  msg.senderId === "You" ? "primary.light" : "background.paper",
-                color: msg.senderId === "You" ? "white" : "inherit",
+                  msg.senderId === userId?.id ? "primary.light" : "background.paper",
+                color: msg.senderId === userId?.id ? "white" : "inherit",
                 borderRadius: 2,
               }}
             >
-              {msg.senderId !== "You" && (
-                <Typography variant="subtitle2">{msg.senderId}</Typography>
+              {msg.senderId !== userId?.id && (
+                <Typography variant="subtitle2">{userId?.username}</Typography>
               )}
               <Typography variant="body2">{msg.content}</Typography>
               <Typography
